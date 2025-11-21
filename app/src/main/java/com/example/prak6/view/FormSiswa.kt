@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.Button
 import androidx.compose.material3.DividerDefaults.Thickness
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
@@ -38,7 +40,7 @@ import com.example.prak6.R
 fun FormSiswa(
     //edit 1 : parameter pilihanJK dan onsubmitbtnclick
     pilihanJK : List<String>,
-    OnSubmitBtnClick : (MutableState<String>) -> Unit,
+    OnSubmitBtnClick : (MutableList<String>) -> Unit,
     modifier: Modifier = Modifier
 ) {
     //edit 2 : tambahkan 4 variable
@@ -68,28 +70,41 @@ fun FormSiswa(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // edit 3 : value, onValuechange, selected, onclick
             OutlinedTextField(
-                value = "",
+                value = txtNama,
                 singleLine = true,
+                shape = MaterialTheme.shapes.medium,
                 modifier = Modifier
                     .padding(top = 20.dp)
                     .width(250.dp),
                 label = {Text(text = "Nama Lengkap")},
-                onValueChange = {},
+                onValueChange = {
+                    txtNama = it
+                },
             )
             HorizontalDivider(modifier = Modifier
                 .padding(20.dp)
-                .width(250.dp), thickness = Thickness, color = Color.Red
+                .width(250.dp), thickness = Thickness, color = Color.Blue
             )
             Row {
                 //menjadi pilihanJK
                 pilihanJK.forEach {
                         item ->
-                    Row (verticalAlignment = Alignment.CenterVertically)
+                    Row (modifier = Modifier.selectable(
+                        selected = txtGender == item,
+                        onClick = {
+                            txtGender = item
+                        }
+                    ),
+                        verticalAlignment = Alignment.CenterVertically)
                     {
+                        // ganti radio button nya
                         RadioButton(
-                            selected = false,
-                            onClick = {item}
+                            selected = txtGender == item,
+                            onClick = {
+                                txtGender = item
+                            }
                         )
                         Text(text = item)
                     }
@@ -99,21 +114,25 @@ fun FormSiswa(
                 .padding(20.dp)
                 .width(250.dp),
                 thickness = 1.dp,
-                color = Color.Red
+                color = Color.Blue
             )
             OutlinedTextField(
-                value = "",
+                value = txtAlamat,
                 singleLine = true,
+                shape = MaterialTheme.shapes.medium,
                 modifier = Modifier
                     .width(250.dp),
                 label = {Text(text = "Alamat")},
-                onValueChange = {},
+                onValueChange = {
+                    txtAlamat = it
+                },
             )
             Spacer(modifier = Modifier.height(30.dp))
             Button (
                 modifier = Modifier.fillMaxWidth(1f)
                     .padding(all = 25.dp),
-                onClick = OnSubmitBtnClick
+                enabled = txtAlamat.isNotEmpty(),
+                onClick = {OnSubmitBtnClick(listData)}
             ){
                 Text(stringResource(id = R.string.submit))
             }
