@@ -9,7 +9,8 @@ lifecycleRuntimeKtx = "2.9.4"
 activityCompose = "1.11.0"
 composeBom = "2024.09.00"
 #tambahin ini wajib
-navigation = "2.9.6"
+navigation = "2.9.4"
+material3 = "1.4.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,8 +29,9 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 #wajib tambahin ini
 androidx-navigation-compose = {module = "androidx.navigation:navigation-compose", version.ref = "navigation"}
-lifecycle-viewmodel-compose = { module = "andoridx.lifecycle:lifecycle-viewmodel-compose", version = "2.9.4" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version = "2.9.4" }
 lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version = "2.9.4" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
