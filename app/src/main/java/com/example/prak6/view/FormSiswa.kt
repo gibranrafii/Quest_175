@@ -19,6 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,10 +35,18 @@ import com.example.prak6.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FormIsian(
-    jenisK:List<String> = listOf("Laki-laki","Perempuan"),
-    OnSubmitBtnClick : () -> Unit
+fun FormSiswa(
+    //edit 1 : parameter pilihanJK dan onsubmitbtnclick
+    pilihanJK : List<String>,
+    OnSubmitBtnClick : (MutableState<String>) -> Unit,
+    modifier: Modifier = Modifier
 ) {
+    //edit 2 : tambahkan 4 variable
+    var txtNama by rememberSaveable { mutableStateOf("") }
+    var txtAlamat by remember { mutableStateOf("") }
+    var txtGender by remember { mutableStateOf("")}
+    val listData: MutableList<String> = mutableListOf(txtNama, txtGender, txtAlamat)
+
     Scaffold(
         modifier = Modifier,
         {
@@ -68,7 +82,8 @@ fun FormIsian(
                 .width(250.dp), thickness = Thickness, color = Color.Red
             )
             Row {
-                jenisK.forEach {
+                //menjadi pilihanJK
+                pilihanJK.forEach {
                         item ->
                     Row (verticalAlignment = Alignment.CenterVertically)
                     {
