@@ -28,6 +28,8 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 #wajib tambahin ini
 androidx-navigation-compose = {module = "androidx.navigation:navigation-compose", version.ref = "navigation"}
+lifecycle-viewmodel-compose = { module = "andoridx.lifecycle:lifecycle-viewmodel-compose", version = "2.9.4" }
+lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version = "2.9.4" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
